@@ -14,8 +14,7 @@ LABEL \
 ENV \
     STI_SCRIPTS_PATH=/usr/libexec/s2i \
     HOME=/opt/app-root/src \
-    GOPATH=$HOME/go \
-    PATH=/opt/app-root/src/bin:/opt/app-root/bin:$GOPATH/bin:$PATH
+    PATH=/opt/app-root/src/bin:/opt/app-root/bin:$PATH
 RUN mkdir -p /opt/app-root/src
 RUN useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin -c "Default Application User" default
 RUN chown -R 1001:0 /opt/app-root
@@ -26,11 +25,7 @@ RUN /usr/bin/chmod -R 770 /var/{lib,log}/nginx/ && chown -R :root /var/{lib,log}
 COPY ./s2i/nginx.conf  /etc/nginx/nginx.conf
 
 
-RUN dnf install -y golang ; dnf clean all
-RUN go get github.com/golang/dep
-RUN go get github.com/magefile/mage
-RUN go get -d github.com/gohugoio/hugo
-RUN cd ${GOPATH}/src/github.com/gohugoio/hugo && mage vendor && mage install
+RUN dnf install -y hugo ; dnf clean all
 
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 WORKDIR ${HOME}

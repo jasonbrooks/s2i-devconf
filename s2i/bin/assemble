@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+echo "---> Installing application source ..."
+cp -Rf /tmp/src/. .
 
 echo "---> Build the website ..."
 hugo
