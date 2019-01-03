@@ -1,15 +1,15 @@
 #!/bin/sh
 
 cat <<EOF
-This is a S2I hugo Fedora base image:
+This is a S2I devconf Fedora base image:
 To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build https://github.com/OSAS/community-website osas/s2i-hugo hugo_blog
+s2i build https://github.com/devconfcz/devconf osas/s2i-devconf devconf_site
 
 You can then run the resulting image via:
-docker run -p 8080:8080 hugo_blog
+docker run -p 8080:8080 devconf_site
 
 
 EOF

@@ -1,14 +1,14 @@
-FROM fedora:27
-MAINTAINER Michael Scherer <mscherer@redhat.com>
+FROM fedora:29
+MAINTAINER Jason Brooks <jbrooks@redhat.com>
 
 
 LABEL \
       # Location of the STI scripts inside the image.
       io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
-      io.k8s.description="Platform for building and running Hugo blog website" \
-      io.k8s.display-name="Hugo builder, Fedora 27" \
+      io.k8s.description="Platform for building and running Devconf website" \
+      io.k8s.display-name="Devconf builder, Fedora 29" \
       io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,hugo"
+      io.openshift.tags="builder,devconf"
 
 
 ENV \
@@ -25,7 +25,7 @@ RUN /usr/bin/chmod -R 770 /var/{lib,log}/nginx/ && chown -R :root /var/{lib,log}
 COPY ./s2i/nginx.conf  /etc/nginx/nginx.conf
 
 
-RUN dnf install -y hugo ; dnf clean all
+RUN dnf install -y python3-pip; dnf clean all; python3 -m pip install devconf
 
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 WORKDIR ${HOME}
