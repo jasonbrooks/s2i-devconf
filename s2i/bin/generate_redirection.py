@@ -10,4 +10,5 @@ if len(sys.argv) > 1:
     f = json.loads(open(sys.argv[1]).read())
     for i in f['hosting']['redirects']:
         i['type'] = redirects[i['type']]
-        print("rewrite {source} {destination} {type};".format(**i))
+        i['source'] = i['source'].replace('.', '\.')
+        print("rewrite ^{source}$ {destination} {type};".format(**i))
