@@ -6,3 +6,5 @@ cp -Rf /tmp/src/. .
 echo "---> Build the website ..."
 comdev devconf build -r
 
+echo "---> Build the redirection ..."
+/usr/libexec/s2i/generate_redirection.py firebase.json > /etc/nginx/redirects.conf 
