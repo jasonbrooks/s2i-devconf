@@ -24,6 +24,7 @@ RUN dnf install -y nginx ; dnf clean all
 RUN /usr/bin/chmod -R 770 /var/{lib,log}/nginx/ && chown -R :root /var/{lib,log}/nginx/
 # Placeholder, generated on build
 RUN touch /etc/nginx/redirects.conf
+RUN /usr/bin/chmod 777 /etc/nginx/redirects.conf
 COPY ./s2i/nginx.conf  /etc/nginx/nginx.conf
 
 
